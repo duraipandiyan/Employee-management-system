@@ -1,7 +1,7 @@
-from  tkinter import *
-from  tkinter import messagebox
+from tkinter import *
+from tkinter import messagebox
 from  tkinter import ttk
-from Eempolyee import *
+from Employee import *
 obj=database("Employee.db")
 
 window=Tk()
@@ -17,51 +17,52 @@ mail=StringVar()
 contact=StringVar()
 cobox=StringVar()
 
-frame1=Frame(window,highlightbackground="black",highlightthickness=4)
+frame1=Frame(window,highlightbackground="black",highlightthickness=10)
 frame1.pack(fill=BOTH)
+frame1.configure(bg="#52595D")
 
-lb_n=Label(frame1,text="NAME",font=("times",18,"bold"),pady=10,padx=10,fg="black")
+lb_n=Label(frame1,text="NAME",bg="#52595D",font=("times",18,"bold"),pady=10,padx=10,fg="black")
 lb_n.grid(row=2,column=0)
 txtn=Entry(frame1,width=30,textvariable=name,font=("times",18,"bold"),fg="blue")
 txtn.grid(row=2,column=1)
 
-lb_epid=Label(frame1,text="EMP_ID",font=("times",18,"bold"),pady=10,padx=10,fg="black")
+lb_epid=Label(frame1,text="EMP_ID",bg="#52595D",font=("times",18,"bold"),pady=10,padx=10,fg="black")
 lb_epid.grid(row=1,column=0)
 txtid=Entry(frame1,width=30,textvariable=empid,font=("times",18,"bold"),fg="blue")
 txtid.grid(row=1,column=1)
 
-lb_n=Label(frame1,text="EMPLOYEE MANAGEMENT SYSTEM",font=("times",25,"italic"),pady=10,padx=10,fg="green")
+lb_n=Label(frame1,text="EMPLOYEE MANAGEMENT SYSTEM",bg="#52595D",font=("times",25,"italic"),pady=10,padx=10,fg="white")
 lb_n.grid(row=0,column=0,columnspan=6)
 
 
-lb_age=Label(frame1,text="AGE",font=("times",18,"bold"),pady=10,padx=10,fg="black")
+lb_age=Label(frame1,text="AGE",bg="#52595D",font=("times",18,"bold"),pady=10,padx=10,fg="black")
 lb_age.grid(row=3,column=0)
 txtage=Entry(frame1,width=30,textvariable=age,font=("times",18,"bold"),fg="blue")
 txtage.grid(row=3,column=1)
 
-lb_add=Label(frame1,text="ADDRESS",font=("times",18,"bold"),pady=10,padx=10,fg="black")
+lb_add=Label(frame1,text="ADDRESS",bg="#52595D",font=("times",18,"bold"),pady=10,padx=10,fg="black")
 lb_add.grid(row=4,column=0)
 txtadd=Entry(frame1,width=30,textvariable=address,font=("times",18,"bold"),fg="blue")
 txtadd.grid(row=4,column=1)
 
-lb_DOB=Label(frame1,text="DOB",font=("times",18,"bold"),pady=10,padx=10,fg="black")
+lb_DOB=Label(frame1,text="DOB",bg="#52595D",font=("times",18,"bold"),pady=10,padx=10,fg="black")
 lb_DOB.grid(row=5,column=0)
 txtDOB=Entry(frame1,width=30,textvariable=dob,font=("times",18,"bold"),fg="blue")
 txtDOB.grid(row=5,column=1)
 
-lb_CO=Label(frame1,text="GENDER",font=("times",18,"bold"),pady=10,padx=10,fg="black")
+lb_CO=Label(frame1,text="GENDER",bg="#52595D",font=("times",18,"bold"),pady=10,padx=10,fg="black")
 lb_CO.grid(row=1,column=3)
 combox=ttk.Combobox(frame1,width=30,textvariable=cobox,font=("times",18,"bold"),state='readonly')
 combox.grid(row=1,column=4)
 combox["value"]=("MALE","FEMALE",'OTHERS')
 combox.config()
 
-lb_ct=Label(frame1,text="CONTACT",font=("times",18,"bold"),pady=10,padx=10,fg="black")
+lb_ct=Label(frame1,text="CONTACT",bg="#52595D",font=("times",18,"bold"),pady=10,padx=10,fg="black")
 lb_ct.grid(row=2,column=3)
 txtct=Entry(frame1,width=30,textvariable=contact,font=("times",18,"bold"),fg="blue")
 txtct.grid(row=2,column=4)
 
-lb_mail=Label(frame1,text="MAIL",font=("times",18,"bold"),pady=10,padx=10,fg="black")
+lb_mail=Label(frame1,text="MAIL",bg="#52595D",font=("times",18,"bold"),pady=10,padx=10,fg="black")
 lb_mail.grid(row=3,column=3)
 txtMAIL=Entry(frame1,width=30,textvariable=mail,font=("times",18,"bold"),fg="blue")
 txtMAIL.grid(row=3,column=4)
@@ -76,10 +77,9 @@ def getrecord(event):
     age.set(row[2])
     address.set(row[3])
     dob.set(row[4])
-    mail.set(row[5])
-    combox.set(row[7])
+    combox.set(row[5])
     contact.set(row[6])
-    #mail.set(row[7])
+    mail.set(row[7])
 
 def displayall():
     tv.delete(*tv.get_children())
@@ -97,7 +97,7 @@ def insert():
 
 def update():
     if txtid.get() == "" or txtn.get() == "" or txtage.get() == "" or txtadd.get() == "" or txtDOB.get() == "" or combox.get() == "" or txtct.get() == "" or txtMAIL.get() == "":
-        messagebox.showwarning("Message", "please Enter all Details")
+        messagebox.showwarning("Message", "please update your Details")
     else:
         obj.update(txtid.get(),txtn.get(),txtage.get(),txtadd.get(),txtDOB.get(),combox.get(),txtct.get(),txtMAIL.get())
         messagebox.showinfo("Message", "update sucessfully")
@@ -107,6 +107,7 @@ def update():
 def delete():
     obj.delete(row[0])
     cleare()
+    messagebox.showinfo("Message", "deleted sucessfully")
     displayall()
 def cleare():
     name.set("")
@@ -117,14 +118,14 @@ def cleare():
     mail.set("")
     contact.set("")
     combox.set("")
-    messagebox.showinfo("Message","cleare sucessfully")
+    #messagebox.showinfo("Message","cleare sucessfully")
 
 
 #butten frame
 btnsub=Button(frame1,text="INSERT",font=("times",15,"bold"),padx=4,pady=4,fg="white",bg="green",bd=0,command=insert)
 btnsub.grid(row=6,column=0,padx=20,pady=20)
 
-btnup=Button(frame1,text="UPDATE",font=("times",15,"bold"),padx=4,pady=4,fg="white",bg="gray",bd=0,command=update)
+btnup=Button(frame1,text="UPDATE",font=("times",15,"bold"),padx=4,pady=4,fg="white",bg="#000080",bd=0,command=update)
 btnup.grid(row=6,column=1,pady=20)
 
 btnDL=Button(frame1,text="DELETE",font=("times",15,"bold"),padx=4,pady=4,fg="white",bg="red",bd=0,command=delete)
